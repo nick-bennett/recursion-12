@@ -2,14 +2,9 @@ package edu.cnm.deepdive;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.MethodSource;
 
 class FactorialsTest {
 
@@ -21,10 +16,10 @@ class FactorialsTest {
   }
 
   @DisplayName("computeRecursive(exceptions)")
-  @ParameterizedTest(name = "[{index}] Asserting computeRecursive({0}) throws IllegalArgumentException.")
+  @ParameterizedTest(name = "[{index}] Asserting computeRecursive({0}) throws {1}.")
   @CsvFileSource(resources = "factorials-test-exception.csv", numLinesToSkip = 1)
-  void computeRecursive_exception(int input) {
-    assertThrows(IllegalArgumentException.class, () -> Factorials.computeRecursive(input));
+  void computeRecursive_exception(int input, Class<? extends Throwable> expectedException) {
+    assertThrows(expectedException, () -> Factorials.computeRecursive(input));
   }
 
 }
